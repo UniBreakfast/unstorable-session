@@ -1,0 +1,16 @@
+[hidden] {
+  display: none !important;
+}
+
+body, input, select, button {
+  text-align: center;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+.marked {
+  font-weight: bold;
+}
+
+.irrelevant {
+  opacity: 0.2;
+}

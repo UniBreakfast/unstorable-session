@@ -1,0 +1,12 @@
+body, input, textarea, select, option, button {
+  text-align: center;
+  font: 16px sans-serif;
+}
+
+form {
+  line-height: 2;
+}
+
+optgroup {
+  text-align: left;
+}

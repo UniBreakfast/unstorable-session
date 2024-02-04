@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <!--<link rel="stylesheet" href="reset.css">-->
+  <link rel="stylesheet" href="base.css">
+  <!--<link rel="stylesheet" href="style.css">-->
+  <!--<script src="script.js" defer></script>-->
+  <script type="module" src="app.js"></script>
+
+  <title>Data Manager UI</title>
+</head>
+
+<body id="body" hidden>
+  <form action="javascript:">
+    <details>
+      <summary>
+        <input type="checkbox" name="mark">
+
+        <select name="items">
+          <option value="item1">Item 1</option>
+          <option value="item2">Item 2</option>
+          <option value="item3">Item 3</option>
+          <option value="item4">Item 4</option>
+          <option value="item5">Item 5</option>
+        </select>
+      </summary>
+
+      <span>
+        <span>2</span>&nbsp;marked,
+      </span>
+      <span>
+        <span>3</span>&nbsp;shown,
+      </span>
+      <span>
+        <span>5</span>&nbsp;hidden,
+      </span>
+      <span>
+        <span>8</span>&nbsp;<span>total</span>
+      </span>
+    </details>
+
+    <details>
+      <summary>
+        <select name="action">
+          <optgroup label="marking">
+            <option value="mark">mark all</option>
+            <option value="unmark">unmark all</option>
+            <option value="invert-mark">invert marks</option>
+          </optgroup>
+          <hr>
+          <optgroup label="visibility">
+            <option value="select" data-in>select specific</option>
+            <option value="hide-one">hide current</option>
+            <option value="hide-marked">hide marked</option>
+            <option value="hide-unmarked">hide unmarked</option>
+            <option value="all">show all</option>
+            <option value="match" data-in>only matching text</option>
+            <option value="regex" data-in>only matching regex</option>
+            <option value="invert-show">only hidden</option>
+          </optgroup>
+          <hr>
+          <optgroup label="changes">
+            <option value="add" data-in>add new</option>
+            <option value="edit" data-in>edit current and update</option>
+            <option value="remove-one">remove current</option>
+            <option value="remove-marked">remove marked</option>
+          </optgroup>
+          <hr>
+          <optgroup label="move">
+            <option value="one-up">current up</option>
+            <option value="one-down">current down</option>
+            <option value="one-top">current to top</option>
+            <option value="one-bottom">current to bottom</option>
+            <option value="marked-up">marked up</option>
+            <option value="marked-down">marked down</option>
+            <option value="marked-top">marked to top</option>
+            <option value="marked-bottom">marked to bottom</option>
+          </optgroup>
+          <hr>
+          <optgroup label="order">
+            <option value="order">restore order</option>
+            <option value="sort">sort alphabetically</option>
+            <option value="reverse">reverse</option>
+            <option value="shuffle">shuffle</option>
+          </optgroup>
+        </select>
+      </summary>
+
+      <input type="text" required>
+
+      <button type="button">
+        <span>×</span>
+        <span hidden>«</span>
+      </button>
+    </details>
+
+    <details>
+      <summary>
+        <button>perform</button>
+      </summary>
+    </details>
+  </form>
+</body>
+
+</html>

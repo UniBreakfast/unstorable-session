@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <!-- <link rel="stylesheet" href="reset.css"> -->
+  <!-- <link rel="stylesheet" href="base.css"> -->
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <script src="script.js" defer></script>
+  <!-- <script type="module" src="app.js"></script> -->
+
+  <title>pacer</title>
+
+  <style>
+    body, select, input { text-align: center; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+
+<body id="body">
+  <form action="javascript:" id="view-form">
+    <label>
+      <span>view</span>
+      <select name="view">
+        <option value="confidence">confidence</option>
+        <option value="add-endeavor">add endeavor</option>
+        <option value="endeavors">endeavors</option>
+        <option value="edit-endeavor">edit endeavor</option>
+        <option value="add-activity">add activity</option>
+        <option value="activities">activities</option>
+        <option value="edit-activity">edit activity</option>
+        <option value="quests">quests</option>
+      </select>
+    </label>
+
+    <button>switch</button>
+  </form>
+
+  <hr>
+
+  <div id="confidence-view">
+    <form action="javascript:" id="confidence-form">
+      <p>
+        <label>
+          <span>current confidence</span>
+          <input type="number" name="confidence" value="0" min="0" pattern="\d+" required>
+        </label>
+      </p>
+  
+      <button>update</button>
+    </form>
+
+    <p>or</p>
+
+    <form action="javascript:" id="confidence-shift-form">
+      <p>
+        <label>
+          <span>shift confidence</span>
+          <input type="text" name="confidence-shift" value="0" pattern="[+\-]\d+" required>
+        </label>
+      </p>
+  
+      <button>apply</button>
+    </form>
+  </div>
+
+  <div id="add-endeavor-view">
+    <form action="javascript:" id="add-endeavor-form">
+      <p>
+        <label>
+          <span>known endeavors</span>
+          <select name="endeavors">
+            <option value="1">Get healthy</option>
+            <option value="2">Get rich</option>
+            <option value="3">Get smart</option>
+          </select>
+        </label>
+      </p>
+      
+      <p>
+        <label>
+          <span>new endeavor name</span>
+          <input type="text" name="endeavor-name" value="Get wealthy" title="at least one alphanumeric character, inner spaces are allowed too." pattern="\w+(\s\w+)*" required>
+        </label>
+      </p>
+  
+      <button>add</button>
+    </form>
+  </div>
+
+  <div id="endeavors-view">
+    <form action="javascript:" id="endeavors-form">
+      <p>
+        <label>
+          <span>endeavor</span>
+          <select name="endeavor">
+            <option value="1">Get healthy</option>
+            <option value="2">Get rich</option>
+            <option value="3">Get smart</option>
+          </select>
+        </label>
+      </p>
+  
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="edit">edit</option>
+            <option value="remove">remove</option>
+            <option value="duplicate">duplicate</option>
+          </select>
+        </label>
+      </p>
+  
+      <button>execute</button>
+    </form>
+  
+    <p>or</p>
+  
+    <form action="javascript:" id="more-endeavors-form">
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="add">add new endeavor</option>
+            <option value="remove-all">remove all endeavors</option>
+          </select>
+        </label>
+      </p>
+  
+      <button>execute</button>
+    </form>
+  </div>
+
+  <div id="edit-endeavor-view">
+    <form action="javascript:" id="edit-endeavor-form">
+      <p>
+        <label>
+          <span>endeavor</span>
+          <select name="endeavor">
+            <option value="1">Get healthy</option>
+            <option value="2">Get rich</option>
+            <option value="3">Get smart</option>
+          </select>
+        </label>
+      </p>
+  
+      <p>
+        <label>
+          <span>new name</span>
+          <input type="text" name="new-name" value="Get healthy" pattern="\w+(\s\w+)*" required>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="update">update</option>
+            <option value="reset">reset</option>
+          </select>
+        </label>
+      </p>
+  
+      <button>execute</button>
+    </form>
+  </div>
+
+  <div id="add-activity-view">
+    <form action="javascript:" id="add-activity-form">
+      <p>
+        <label>
+          <span>known activities</span>
+          <select name="activities">
+            <option value="1">Read a book, 20 minutes, 3</option>
+            <option value="2">Run, 30 minutes, 9</option>
+            <option value="3">Meditate, 10 minutes, 4</option>
+          </select>
+        </label>
+      </p>
+      
+      <p>
+        <label>
+          <span>new activity name</span>
+          <input type="text" name="activity-name" value="Read a book" title="at least one alphanumeric character, inner spaces are allowed too." pattern="\w+(\s\w+)*" required>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>new activity amount</span>
+          <input type="text" name="activity-amount" 
+          value="20 minutes" title="at least one alphanumeric character, inner spaces are allowed too."
+          pattern="\w+(\s\w+)*" required>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>new activity difficulty</span>
+          <input type="number" name="activity-difficulty" value="3" min="1" max="10" pattern="\d\d?" required>
+        </label>
+      </p>
+  
+      <button>add</button>
+    </form>
+  </div>
+
+  <div id="activities-view">
+    <form action="javascript:" id="activities-form">
+      <p>
+        <label>
+          <span>activity</span>
+          <select name="activity">
+            <option value="1">Read a book, 20 minutes, 3</option>
+            <option value="2">Run, 30 minutes, 9</option>
+            <option value="3">Meditate, 10 minutes, 4</option>
+          </select>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="edit">edit</option>
+            <option value="remove">remove</option>
+            <option value="duplicate">duplicate</option>
+          </select>
+        </label>
+      </p>
+
+      <button>execute</button>
+    </form>
+
+    <p>or</p>
+
+    <form action="javascript:" id="more-activities-form">
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="add">add new activity</option>
+            <option value="remove-all">remove all activities</option>
+          </select>
+        </label>
+      </p>
+
+      <button>execute</button>
+    </form>
+  </div>
+
+  <div id="edit-activity-view">
+    <form action="javascript:" id="edit-activity-form">
+      <p>
+        <label>
+          <span>activity</span>
+          <select name="activity">
+            <option value="1">Read a book, 20 minutes, 3</option>
+            <option value="2">Run, 30 minutes, 9</option>
+            <option value="3">Meditate, 10 minutes, 4</option>
+          </select>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>new name</span>
+          <input type="text" name="new-name" value="Read a book" pattern="\w+(\s\w+)*" required>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>new amount</span>
+          <input type="text" name="new-amount" value="20 minutes" pattern="\w+(\s\w+)*" required>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>new difficulty</span>
+          <input type="number" name="new-difficulty" value="3" min="1" max="10" pattern="\d\d?" required>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="update">update</option>
+            <option value="reset">reset</option>
+          </select>
+        </label>
+      </p>
+
+      <button>execute</button>
+    </form>
+  </div>
+  
+  <div id="quests-view">
+    <form action="javascript:" id="quests-form">
+      <p>
+        <label>
+          <span>quest</span>
+          <select name="quest">
+            <option value="1">Read a book, 20 minutes, 3/5, 60%, -25</option>
+            <option value="2">Run, 30 minutes, 9/10, 90%, -18</option>
+          </select>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="details">view details</option>
+            <option value="same-activity">view similar quests</option>
+            <option value="recreate">take new similar quest</option>
+          </select>
+        </label>
+      </p>
+
+      <button>execute</button>
+    </form>
+
+    <p>or</p>
+
+    <form action="javascript:" id="more-quests-form">
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="all">view all quests</option>
+            <option value="active">view active quests</option>
+            <option value="finished">view finished quests</option>
+            <option value="failed">view failed quests</option>
+            <option value="new">start new quest</option>
+          </select>
+        </label>
+      </p>
+
+      <button>execute</button>
+    </form>
+  </div>
+
+  <div id="quest-view">
+    <form action="javascript" id="quest-form">
+      <p>
+        <label>
+          <span>quest</span>
+          <select name="quest">
+            <option value="1">Read a book, 20 minutes, 3/5, 60%, -25</option>
+            <option value="2">Run, 30 minutes, 9/10, 90%, -18</option>
+          </select>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>acts</span>
+          <select name="act">
+            <option value="1">Sun, 2024-01-14, 1(1), +1, done</option>
+            <option value="2">Mon, 2024-01-15, 2(2), +1, done</option>
+            <option value="3">Tue, 2024-01-16, 3(3), +1, done</option>
+            <option value="4">Wed, 2024-01-17, 4(4), +1, planned</option>
+            <option value="5">Thu, 2024-01-18, 5(5), +1, planned</option>
+          </select>
+        </label>
+      </p>
+
+      <p>
+        <label>
+          <span>action</span>
+          <select name="action">
+            <option value="done">mark as done</option>
+            <option value="failed">mark as failed</option>
+            <option value="unmark">remove incorrect status mark</option>
+          </select>
+        </label>
+      </p>
+
+      <button>execute</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

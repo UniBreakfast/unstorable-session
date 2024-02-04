@@ -1,0 +1,33 @@
+<form action="javascript:" id="edit-endeavor-form" title="Edit endeavor.">
+  <p>
+    <label>
+      <span>endeavor:</span>
+      
+      <select name="endeavor">
+        <option value="1">Get a job</option>
+        <option value="2">Get a girlfriend</option>
+        <option value="3">Get a life</option>
+      </select>
+    </label>
+  </p>
+
+  <p>
+    <label>
+      <span>new name</span>
+      <input type="text" name="new-name" value="Get ready" title="alpha-numeric characters only, inner spaces allowed" pattern="\w+( \w+)*" required>
+    </label>
+  </p>
+
+  <p>
+    <label>
+      <span>action</span>
+
+      <select name="action">
+        <option value="revert">revert</option>
+        <option value="update">update</option>
+      </select>
+    </label>
+  </p>
+
+  <button>perform</button>
+</form>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+  <!-- <link rel="stylesheet" href="reset.css"> -->
+  <link rel="stylesheet" href="base.css">
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- <script src="script.js" defer></script> -->
+  <script type="module" src="app.js"></script>
+
+  <title>records</title>
+</head>
+
+<body id="body" hidden>
+  <form action="javascript:">
+    <p>
+      <details>
+        <summary> &nbsp; &nbsp;
+          <span>all </span>
+
+          <label>
+            <span>items:</span>
+
+            <select name="items">
+              <option value="1">alpha</option>
+              <option value="2">beta</option>
+              <option value="3">gamma</option>
+            </select>
+          </label>
+          <input type="checkbox" title="mark/unmark">
+        </summary>
+
+        <p>
+          no filtering applied, all 5 items are shown
+        </p>
+      </details>
+    </p>
+
+    <p>
+      <label>
+        <span>string</span>
+
+        <input type="text" value="delta" title="alpha-numeric characters and inner spaces only" pattern="\w+( \w+)*" required>
+
+        <button type="button" title="clear">&times;</button>
+      </label>
+    </p>
+
+    <p>
+      <label>
+        <span>action</span>
+
+        <select name="action">
+          <option value="find">find exact match</option>
+          <option value="all">show all</option>
+          <option value="search">show matches only</option>
+          <option value="regex">show by regex only</option>
+          <option value="marked">show marked only</option>
+          <option value="unmarked">show unmarked only</option>
+          <hr>
+          <option value="add">add</option>
+          <option value="copy">copy</option>
+          <option value="update">update</option>
+          <option value="remove">remove</option>
+          <hr>
+          <option value="order">restore order</option>
+          <option value="sort">sort alphabetically</option>
+          <option value="reverse">reverse</option>
+          <option value="up">move up</option>
+          <option value="down">move down</option>
+          <option value="top">move to top</option>
+          <option value="bottom">move to bottom</option>
+          <option value="shuffle">shuffle</option>
+          <hr>
+          <option value="mark">mark all</option>
+          <option value="unmark">unmark all</option>
+          <hr>
+          <option value="remove-marked">remove marked</option>
+          <option value="clear">remove all</option>
+        </select>
+      </label>
+    </p>
+
+    <details>
+      <summary> &nbsp; &nbsp;
+        <button type="submit">perform</button>
+      </summary>
+
+      <p>Select or mark items, input value, choose action and perform it.</p>
+    </details>
+  </form>
+</body>
+
+</html>
