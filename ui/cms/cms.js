@@ -4,7 +4,8 @@ import { markableSelect as ms } from './ms/ms.js';
 import { countDetails as cd } from './cd/cd.js';
 
 const { 
-  markAll, unmarkAll, invertMark, selectItem, 
+  getSelection, getMarked,
+  fill, markAll, unmarkAll, invertMark, selectItem, 
   unhide, hide, hideMarked, hideUnmarked, toggleHideAll,
   showMatched,
   add, update, remove, removeMarked,
@@ -15,7 +16,8 @@ const {
 } = ms;
 
 const cms = {
-  init,
+  init, fill,
+  getSelection, getMarked,
   markAll, unmarkAll, invertMark, selectItem,
   unhide, hide, hideMarked, hideUnmarked, toggleHideAll,
   showMatched,

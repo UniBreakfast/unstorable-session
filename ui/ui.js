@@ -5,7 +5,8 @@ import { countedMarkableSelect as cms } from './cms/cms.js';
 import { actionBlock as ab } from './ab/ab.js';
 
 const { 
-  markAll, unmarkAll, invertMark,
+  getSelection, getMarked,
+  fill: fillItems, markAll, unmarkAll, invertMark,
   unhide, hide, hideMarked, hideUnmarked, toggleHideAll,
   remove, removeMarked,
   moveCurrentUp, moveCurrentDown, moveCurrentFirst, moveCurrentLast,
@@ -13,8 +14,10 @@ const {
   restoreOrder, sort, reverse, shuffle,
 } = cms;
 
+const { getInput } = ab;
+
 const ui = {
-  init, show, on,
+  init, show, on, fillItems, getSelection, getInput, getMarked,
   markAll, unmarkAll, invertMark, selectRequestedItem,
   unhide, hide, hideMarked, hideUnmarked, toggleHideAll,
   showBySubstring, showByRegEx,
@@ -54,27 +57,27 @@ function fillInput() {
 }
 
 function selectRequestedItem() {
-  cms.selectItem(ab.getInput());
+  cms.selectItem(getInput());
 }
 
 function showBySubstring() {
-  const str = ab.getInput();
+  const str = getInput();
   
   cms.showMatched(text => text.includes(str));
 }
 
 function showByRegEx() {
-  const regex = new RegExp(ab.getInput(), 'i');
+  const regex = new RegExp(getInput(), 'i');
 
   cms.showMatched(text => regex.test(text));
 }
 
 function addItem() {
-  cms.add(ab.getInput());
+  cms.add(getInput());
 }
 
 function updateItem() {
-  cms.update(ab.getInput());
+  cms.update(getInput());
 }
 
 function handleSubmit(e) {

@@ -3,6 +3,7 @@ export { is as itemSelect, is };
 import { itemSelect as s } from '../../../elements.js';
 
 const is = {
+  init, on, count, getSelection, getMarked,
   empty, addAbove, addBelow, fill, select, selectItem,
   toggleMark, isMarked, markAll, unmarkAll, invertMark,
   unhide, hide, hideMarked, hideUnmarked, toggleHideAll,
@@ -10,9 +11,9 @@ const is = {
   update, remove, removeMarked,
   moveCurrentUp, moveCurrentDown, moveCurrentFirst, moveCurrentLast,
   moveMarkedUp, moveMarkedDown, moveMarkedFirst, moveMarkedLast,
-  on, count,
   getItemText,
   restoreOrder, sort, reverse, shuffle,
+  experiment,
 };
 
 const h = {}; // handlers
@@ -23,13 +24,35 @@ let options = [...s];
 let optionDict, textDict;
 let o = s.selectedOptions[0];
 
-updateDictionary();
+function experiment() {
+  
+}
 
-s.onchange = handleChange;
+function init() {
+  updateDictionary();
 
-function updateDictionary() {
-  textDict = Object.fromEntries(options.map(o => [o.value, o.text]));
-  optionDict = Object.fromEntries(options.map(o => [o.value, o]));
+  s.onchange = handleChange;
+}
+
+function on(eventName, handler) {
+  h[eventName] = handler;
+}
+
+function count() {
+  const total = options.length;
+  const marked = options.filter(o => o.hasAttribute('data-mark')).length;
+  const hidden = options.filter(o => o.hidden).length;
+  const shown = total - hidden;
+
+  return { marked, shown, hidden, total };
+}
+
+function getSelection() {
+  return s.value;
+}
+
+function getMarked() {
+  return options.filter(o => o.hasAttribute('data-mark')).map(o => o.value);
 }
 
 function empty() {
@@ -81,15 +104,20 @@ function addAbove(value, text) {
 }
 
 function fill(items) {
+  const readyDict = optionDict || {};
+  const value = s.value;
+
   empty();
 
   for (const key in items) {
-    options.push(createOption(key, items[key]));
+    options.push(readyDict[key] || createOption(key, items[key]));
   }
 
   s.append(...options);
   updateDictionary();
-  o = options[0];
+
+  
+  select(value);
 
   h['countchange']?.();
 }
@@ -98,7 +126,7 @@ function select(value) {
   if (arguments.length) {
     const option = optionDict[value];
 
-    if (!option) return;
+    if (!option) return select();
 
     s.value = value;
     o = option;
@@ -125,7 +153,7 @@ function select(value) {
 }
 
 function selectItem(text) {
-  const option = options.find(o => o.text == text);
+  const option = options.find(o => textDict[o.value] == text);
 
   if (option) select(option.value);
 }
@@ -242,7 +270,7 @@ function toggleHideAll() {
   if (!hiddenOptions.length) return;
 
   if (hiddenOptions.length == options.length) return unhide();
-    
+
   markAll();
   unhide();
   hideMarked();
@@ -274,7 +302,7 @@ function remove() {
   o.remove();
   delete textDict[o.value];
   delete optionDict[o.value];
-  
+
   select();
 
   h['countchange']?.();
@@ -293,7 +321,7 @@ function removeMarked() {
     }
   }
   if (!document.contains(o)) o = null;
-  
+
   select();
 
   h['countchange']?.();
@@ -389,21 +417,8 @@ function moveMarkedLast() {
   s.append(...markedOptions);
 }
 
-function on(eventName, handler) {
-  h[eventName] = handler;
-}
-
 function isMarked() {
   return o && o.hasAttribute('data-mark') || false;
-}
-
-function count() {
-  const total = options.length;
-  const marked = options.filter(o => o.hasAttribute('data-mark')).length;
-  const hidden = options.filter(o => o.hidden).length;
-  const shown = total - hidden;
-
-  return { marked, shown, hidden, total };
 }
 
 function handleChange() {
@@ -441,4 +456,9 @@ function shuffle() {
   }
 
   s.append(...options);
+}
+
+function updateDictionary() {
+  textDict = Object.fromEntries(options.map(o => [o.value, o.text]));
+  optionDict = Object.fromEntries(options.map(o => [o.value, o]));
 }
